@@ -49,7 +49,7 @@ if [ "x$2" == "xnocache" ]; then
 	#echo "Drop caches.."
 	#time echo 1 > /proc/sys/vm/drop_caches
 	echo "sync.."
-	sync
+	sync $TMPDIR/target-dev
 else
 	sleep 0.3
 fi
