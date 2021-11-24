@@ -1,0 +1,44 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:testing
+      # allow mounting and devtmpfs in the container
+      options: --user=root --privileged -v /dev:/dev
+        #env:
+        #  LOOPDEV_DEBUG: all
+    steps:
+    - name: Inspect environment
+      run: |
+        whoami
+        gcc --version || true
+        mount --version
+        uname -a
+        lsmod || true
+        ls -la /dev/loop*
+
+    - name: Mount /tmp as tmpfs
+      run: |
+        mount -t tmpfs tmpfs /tmp
+
+    - uses: actions/checkout@v2
+
+    - name: Run test.sh (with cache drop)
+      run: |
+        ./test.sh 50 nocache
+
+    - name: Run test.sh (with sleep)
+      run: |
+        ./test.sh 50
+
+    - name: Show system status
+      if: ${{ failure() }}
+      run: |
+        mount || true
+        cat /tmp/tmp*/test.log || true
+        dmesg | tail -n 100
+        losetup || true
