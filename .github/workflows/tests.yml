@@ -23,11 +23,11 @@ jobs:
 
     - name: Run test.sh (with cache drop)
       run: |
-        ./test.sh 50 nocache
+        sudo ./test.sh 50 nocache
 
     - name: Run test.sh (with sleep)
       run: |
-        ./test.sh 50
+        sudo ./test.sh 50
 
     - name: Show system status
       if: ${{ failure() }}
