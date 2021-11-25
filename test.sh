@@ -36,6 +36,8 @@ flock $TMPDIR/target-dev mount -t ext4 $TMPDIR/target-dev $TMPDIR/mount
 touch $TMPDIR/mount/status.file || true
 umount $TMPDIR/target-dev
 
+ps faux
+
 # echo if loop associated
 echo "TP@0: $(losetup -j $TMPDIR/target-dev)"
 
