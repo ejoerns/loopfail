@@ -17,7 +17,7 @@ jobs:
 
     - name: Mount /tmp as tmpfs
       run: |
-        mount -t tmpfs tmpfs /tmp
+        sudo mount -t tmpfs tmpfs /tmp
 
     - uses: actions/checkout@v2
 
