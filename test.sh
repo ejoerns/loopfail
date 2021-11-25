@@ -49,7 +49,7 @@ if [ "x$2" == "xnocache" ]; then
 	echo "Drop caches.."
 	time echo 1 > /proc/sys/vm/drop_caches
 else
-	sleep 0.3
+	#sleep 0.3
 fi
 
 # mount again for writing status file (manually with losetup)
